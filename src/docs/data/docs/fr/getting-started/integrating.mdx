@@ -30,9 +30,28 @@ This theme is designed to work seamlessly with other Tailwind CSS v4 templates b
     /* docs styles */
     @import "@/docs/styles/docs-global.css";
     ```
-3. Add the docs content collection to your site's content collection config file.
+3. Add the docs content collection and tabs setup to your site's content collection config file.
 
-    ```ts title="src/content.config.ts" ins={3-31, 35}
+    ```ts title="src/content.config.ts" ins={3-18, 22-52, 56}
+    // other imports...
+
+    import { locales } from "@/docs/config/siteSettings.json";
+    import type { DocsTab } from "@/docs/config/types/configDataTypes";
+    import { getTranslatedData } from "@/docs/js/translationUtils";
+
+    const allTabIds = new Set<string>();
+    for (const locale of locales) {
+      const sidebarData = getTranslatedData("sidebarNavData", locale);
+
+      if (sidebarData.tabs) {
+        sidebarData.tabs.forEach((tab: DocsTab) => {
+          allTabIds.add(tab.id);
+        });
+      }
+    }
+
+    const tabIds = [...allTabIds].length > 0 ? [...allTabIds] : ["main"];
+
     // other collections...
 
     const docsCollection = defineCollection({
@@ -41,6 +60,8 @@ This theme is designed to work seamlessly with other Tailwind CSS v4 templates b
         z.object({
           title: z.string(),
           description: z.string().optional(),
+          // Tab field is used to associate individual docs with specific tabs
+          tab: z.enum(tabIds as [string, ...string[]]).default("main"),
           sidebar: z
             .object({
               label: z.string().optional(),
@@ -96,7 +117,7 @@ This theme is designed to work seamlessly with other Tailwind CSS v4 templates b
 
 5. Add the docs pages to your site. 
 
-    From the Solstice theme copy the whole `src/pages/docs` folder into your site's `src/pages/docs` folder.
+    From the Solstice theme copy the whole `src/pages/[docsRoute]` folder into your site's `src/pages/[docsRoute]` folder.
 
 </Steps>
 
