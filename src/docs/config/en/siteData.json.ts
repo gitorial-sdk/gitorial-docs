@@ -3,15 +3,20 @@ import type { DocsSiteData } from "../types/configDataTypes";
 const docsSiteData: DocsSiteData = {
   title: "Gitorial",
   description:
-    "A modern, fast, and feature-rich documentation theme built with Astro v5 and Tailwind CSS v4.",
+    "Interactive tutorials for VS Code - Learn coding concepts through guided, hands-on experiences with the Gitorial extension.",
   navSocials: [
-    // {
-    //   social: "GitHub",
-    //   link: "https://github.com/Boston343",
-    //   icon: "mdi/github",
-    // },
+    {
+      social: "GitHub",
+      link: "https://github.com/gitorial-sdk/gitorial-vscode.git",
+      icon: "tabler/brand-github",
+    },
   ],
   footerSocials: [
+    {
+      social: "GitHub",
+      link: "https://github.com/gitorial-sdk/gitorial-vscode.git",
+      icon: "tabler/brand-github",
+    },
     {
       social: "X formerly known as Twitter",
       link: "https://x.com/BowTiedWebReapr",
@@ -27,22 +32,17 @@ const docsSiteData: DocsSiteData = {
       link: "https://bsky.app/profile/webreaper.dev",
       icon: "tabler/brand-bluesky",
     },
-    {
-      social: "GitHub",
-      link: "https://github.com/Boston343",
-      icon: "tabler/brand-github",
-    },
   ],
   // default image for meta tags if the page doesn't have an image already
   defaultImage: {
-    src: "/images/solstice.jpg",
-    alt: "Solstice",
+    src: "/images/gitorial-logo.png",
+    alt: "Gitorial Logo",
   },
   // Your information for SEO purposes
   author: {
-    name: "Cosmic Themes",
-    email: "creator@cosmicthemes.com",
-    twitter: "Cosmic_Themes",
+    name: "Andrzej Sulkowski",
+    email: "author@gitorial-sdk.com",
+    twitter: "BowTiedWebReapr",
   },
 };
 

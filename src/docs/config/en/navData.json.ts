@@ -1,5 +1,5 @@
 /**
- * * This file is used to define the navigation links for the documentation site.
+ * * This file is used to define the navigation links for the Gitorial documentation site.
  */
 
 // types
@@ -7,16 +7,20 @@ import { type navItem } from "../types/configDataTypes";
 
 const navConfig: navItem[] = [
   {
-    text: "Introduction",
+    text: "Getting Started",
     link: "/docs/getting-started/",
   },
   {
-    text: "Components",
-    link: "/docs/components/",
+    text: "Features",
+    link: "/docs/features/",
   },
   {
-    text: "Get Gitorial",
-    link: "https://cosmicthemes.com/themes/Gitorial",
+    text: "Development",
+    link: "/docs/development/",
+  },
+  {
+    text: "GitHub",
+    link: "https://github.com/gitorial-sdk/gitorial-vscode.git",
     newTab: true,
   },
 ];

@@ -13,7 +13,7 @@ const sidebarNavData: DocsSidebarNavData = {
       // "main" is the default tab keyword
       id: "main",
       title: "Documentation",
-      description: "Main documentation",
+      description: "Gitorial VS Code Extension Documentation",
       icon: "tabler/file-text",
       // Ordered list of sidebar sections for the 'main' tab
       // The "id" of each section should match a folder in the docs content collection
@@ -23,42 +23,12 @@ const sidebarNavData: DocsSidebarNavData = {
           title: "Getting Started",
         },
         {
-          id: "components",
-          title: "Components",
+          id: "features",
+          title: "Features",
         },
         {
-          id: "reference",
-          title: "Reference",
-        },
-      ],
-    },
-    {
-      id: "api",
-      title: "API Reference",
-      description: "API documentation",
-      icon: "tabler/api-app",
-      // Ordered list of sidebar sections for the 'api' tab
-      sections: [
-        {
-          id: "endpoints",
-          title: "Endpoints",
-        },
-        {
-          id: "authentication",
-          title: "Authentication",
-        },
-      ],
-    },
-    {
-      id: "tutorials",
-      title: "Tutorials",
-      description: "Step-by-step tutorials",
-      icon: "tabler/school",
-      // Ordered list of sidebar sections for the 'tutorials' tab
-      sections: [
-        {
-          id: "tips-and-tricks",
-          title: "Tips and Tricks",
+          id: "development",
+          title: "Development",
         },
       ],
     },

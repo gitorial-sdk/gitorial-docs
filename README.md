@@ -1,82 +1,95 @@
-# Welcome to Gitorial SDK Docs!
+# Gitorial Documentation
 
-This theme uses Astro v5 and Tailwind CSS v4. It is designed so that it can be used as a standalone docs site, but it is also designed to easily integrate with other templates by Cosmic Themes.
+![Version](https://img.shields.io/badge/version-0.2.2-yellow)
+![VS Code](https://img.shields.io/badge/VS%20Code-1.87.0+-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## Quickstart
+The official documentation site for **Gitorial**, a VS Code extension that enables interactive, step-by-step coding tutorials directly in your editor. Learn coding concepts, frameworks, and best practices through guided, hands-on experiences.
 
-1. To get started, first install all necessary packages with `npm install` or `pnpm install`, then run an initial build to make sure the setup works with `npm run build` or `pnpm build`.
-2. Copy the Pagefind build (for site search) to be available for the dev environment. This varies depending on your OS. I've created a few commands to help.
-   - For Windows, run `npm run winsearch`
-   - For OSX or Linux, run `npm run osxsearch`
-3. Next, you'll want to configure your site i18n setup (one language, or multiple). Simply run the command `npm run docs:config-i18n` and follow the script instructions to get setup! For further information, see the [i18n documentation](https://cosmicthemes.com/docs/i18n/).
-4. Now you can setup the site to your liking!
-   - [Style customization](https://cosmicthemes.com/docs/styles/)
-   - [Content editing](https://cosmicthemes.com/docs/content/)
-   - [Animations](https://cosmicthemes.com/docs/animations/)
-   - [Forms](https://cosmicthemes.com/docs/contact-form/)
+## 🚀 Quick Start
 
-Should you need any assistance, send me a message at support@cosmicthemes.com
+### Installation
 
-## Code Intros
+1. **Install from VS Code Marketplace**
+   - Open VS Code
+   - Go to Extensions (`Ctrl+Shift+X` or `Cmd+Shift+X`)
+   - Search for **"Gitorial"**
+   - Click **Install**
 
-I have created a few code tours to help introduce you to the codebase. You will need the extension [Code Tour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour) to view them in VSCode or another IDE.
+2. **Manual Installation**
+   - Download the latest `.vsix` file from [GitHub Releases](https://github.com/gitorial-sdk/gitorial-vscode.git/releases)
+   - Run `Extensions: Install from VSIX...` in VS Code command palette
 
-## Code Structure
+### Your First Tutorial
 
-The code is structured with most items under the `src/docs` directory. This makes it easy to drop that entire folder into an existing Cosmic Themes project and to add docs functionality in a matter of minutes.
+1. Open the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`)
+2. Run **`Gitorial: Clone New Tutorial`**
+3. Enter a tutorial repository URL
+4. The extension will clone and open the tutorial automatically
 
-## Configuration Options
+## 📚 Documentation Sections
 
-Overall site configuration is done in the `src/docs/config/` folder. Most settings are inside individual language folders in order to make it easier to handle translations.
+### [Getting Started](/docs/getting-started/)
+Learn the basics of using Gitorial, from installation to your first tutorial experience.
 
-### Site Settings
+### [Features](/docs/features/)
+Explore all the powerful features that make Gitorial an exceptional learning platform.
 
-The `src/docs/config/siteSettings.json.ts` file is used to configure the site settings. These include things like whether to enable view transitions, whether to enable animations, and whether to show copy link buttons for docs headings.
+### [Development](/docs/development/)
+Contribute to the Gitorial ecosystem and help build the future of interactive learning.
 
-### Site Data
+## 🏗️ Technical Architecture
 
-The `src/docs/config/[language]/siteData.json.ts` file is used to configure the site data. This includes things like the site title, description, social links, and default image.
+Gitorial follows a **Clean Architecture** pattern with three distinct layers:
 
-### Nav Data
+- **UI Layer**: VS Code integration and user interface management
+- **Domain Layer**: Core business logic and tutorial processing
+- **Infrastructure Layer**: External dependencies and data persistence
 
-Configure your navigation data for the top navbar in the `src/docs/config/[language]/navData.json.ts` file.
+## 🛠️ Development
 
-### Sidebar Layout
+### Prerequisites
+- Node.js v20+
+- pnpm v10+
+- VS Code v1.87+
+- Git
 
-Configure the order for your documentation sections in the `src/docs/config/[language]/sidebarNavData.json.ts` file.
+### Local Development Setup
 
-### Robots
+```bash
+# Clone the repository
+git clone https://github.com/gitorial-sdk/gitorial-vscode.git
+cd gitorial-vscode
 
-For robots like Google to see the correct sitemap, you will want to edit the `public/robots.txt` file to use your website domain.
+# Install dependencies
+pnpm install
 
-## More Resources
+# Start development mode
+pnpm run dev
 
-- See my blog post on [recommended Astro web development setup](https://cosmicthemes.com/blog/astro-web-development-setup/).
-- You can learn more information from the [theme docs](https://cosmicthemes.com/docs/) page on the [Cosmic Themes Website](https://cosmicthemes.com/).
-- For support, see the [support page](https://cosmicthemes.com/support/).
-- [License details](https://cosmicthemes.com/license/)
+# Run tests
+pnpm run test
 
-## General Astro Info
+# Build for production
+pnpm run build
+```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+For detailed development information, see the [Development Guide](/docs/development/).
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🌍 Community & Support
 
-Any static assets, like images, can be placed in the `public/` directory. I also frequently use `src/assets` for images when using Astro asssets for image optimization.
+- **GitHub**: [gitorial-sdk/gitorial-vscode](https://github.com/gitorial-sdk/gitorial-vscode.git)
+- **Issues**: [Bug reports and feature requests](https://github.com/gitorial-sdk/gitorial-vscode.git/issues)
+- **Discussions**: [Community discussions](https://github.com/gitorial-sdk/gitorial-vscode.git/discussions)
 
-### Commands
+## 📄 License
 
-All commands are run from the root of the project, from a terminal:
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/gitorial-sdk/gitorial-vscode.git/blob/main/LICENSE) file for details.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 🙏 Acknowledgments
 
-### Want to learn more?
+This project is proudly **funded by Polkadot OpenGov**. We're grateful for the community's support in making interactive learning more accessible for developers in the Polkadot ecosystem and beyond.
 
-Feel free to check [the documentation](https://docs.astro.build) or jump into the [Discord server](https://astro.build/chat).
+---
+
+**Made with ❤️ by [Andrzej Sulkowski](https://github.com/andrzejSulkowski)**

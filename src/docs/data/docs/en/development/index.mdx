@@ -1,0 +1,331 @@
+---
+title: "Development"
+description: "Contribute to the Gitorial VS Code extension and help build the future of interactive learning."
+tab: main
+sidebar:
+  label: "Overview"
+  order: 3
+pagefind: true
+---
+
+# Gitorial Development
+
+Join the Gitorial community and contribute to building the future of interactive coding education. This guide covers everything you need to know to contribute to the Gitorial VS Code extension.
+
+## Quick Start
+
+### Prerequisites
+
+- **Node.js**: v20 or higher
+- **pnpm**: v10 or higher
+- **VS Code**: v1.87 or higher
+- **Git**: Latest version
+
+### Development Setup
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/gitorial-sdk/gitorial-vscode.git
+cd gitorial-vscode
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Start development mode
+pnpm run dev
+
+# 4. Open in VS Code for development
+code .
+
+# 5. Press F5 to run in Extension Development Host
+```
+
+## Architecture Overview
+
+Gitorial follows a **Clean Architecture** pattern with three distinct layers:
+
+### 1. UI Layer (`src/ui/`)
+Orchestrates user interactions between VS Code APIs and domain services.
+
+**Key Modules:**
+- **Tutorial Controller** (`src/ui/tutorial/`): Manages tutorial lifecycle, navigation, and webview communication
+- **Webview Manager** (`src/ui/webview/`): Handles panel management and extension-webview communication
+- **System Operations** (`src/ui/system/`): Extension-wide operations and global commands
+
+### 2. Domain Layer (`src/domain/`)
+Contains core business logic independent of UI and infrastructure concerns.
+
+**Key Modules:**
+- **Models**: `Tutorial`, `Step`, `EnrichedStep` (core entities)
+- **Services**: `TutorialService`, `TutorialBuilder`, `DiffService` (business logic)
+- **Repositories**: Data persistence interfaces
+- **Ports**: External dependency interfaces
+
+### 3. Infrastructure Layer (`src/infrastructure/`)
+Implements domain ports and handles VS Code APIs and external systems.
+
+**Key Modules:**
+- **Adapters**: Concrete implementations of domain ports
+- **Repositories**: Data persistence implementations
+- **Factories**: Component creation and dependency injection
+
+## Development Patterns
+
+### Message-Driven Communication
+
+The webview and extension communicate through strongly-typed messages:
+
+```typescript
+// Messages defined in packages/shared-types/src/ui/messages/
+interface TutorialMessage {
+  type: 'step-navigation' | 'content-update' | 'progress-sync';
+  payload: any;
+}
+```
+
+### Modular Controllers
+
+Tutorial functionality is split across focused controllers:
+- `lifecycle.ts`: Loading, initialization, cleanup
+- `navigation.ts`: Step navigation and progress tracking
+- `webview.ts`: Panel management and communication
+- `editor.ts`: VS Code editor integration
+
+### Resource Management
+
+Dedicated managers handle VS Code resources:
+- **EditorManager**: VS Code editor tabs and diff views
+- **WebviewPanelManager**: Webview panel lifecycle
+- **TabTrackingService**: Open tab tracking per step
+
+## Adding New Features
+
+### 1. Define the Interface
+Add the interface to `src/domain/ports/`:
+
+```typescript
+export interface ICustomFeature {
+  execute(data: CustomData): Promise<CustomResult>;
+}
+```
+
+### 2. Implement Business Logic
+Add the service to `src/domain/services/`:
+
+```typescript
+export class CustomFeatureService {
+  async execute(data: CustomData): Promise<CustomResult> {
+    // Business logic here
+  }
+}
+```
+
+### 3. Create the Adapter
+Implement the port in `src/infrastructure/adapters/`:
+
+```typescript
+export class CustomFeatureAdapter implements ICustomFeature {
+  async execute(data: CustomData): Promise<CustomResult> {
+    // VS Code API integration
+  }
+}
+```
+
+### 4. Wire Up the UI
+Connect everything in `src/ui/tutorial/controller/`:
+
+```typescript
+// Add to the main controller
+this.customFeature = new CustomFeatureService(
+  new CustomFeatureAdapter()
+);
+```
+
+## Testing
+
+### Running Tests
+
+```bash
+# Run all tests
+pnpm run test
+
+# Run unit tests only
+pnpm run test:unit
+
+# Run integration tests only
+pnpm run test:integration
+
+# Run with coverage
+pnpm run test:coverage
+```
+
+### Test Structure
+
+- **Unit Tests**: Located alongside source files (`*.test.ts`)
+- **Integration Tests**: Located in `src/test/`
+- **Framework**: Mocha + Chai
+
+### Writing Tests
+
+```typescript
+import { expect } from 'chai';
+import { CustomFeatureService } from './CustomFeatureService';
+
+describe('CustomFeatureService', () => {
+  it('should execute custom feature', async () => {
+    const service = new CustomFeatureService();
+    const result = await service.execute(testData);
+    expect(result).to.deep.equal(expectedResult);
+  });
+});
+```
+
+## Building & Packaging
+
+### Development Build
+
+```bash
+# Build for development
+pnpm run build
+
+# Build and watch for changes
+pnpm run dev
+```
+
+### Production Build
+
+```bash
+# Create production build
+pnpm run build
+
+# Package as .vsix
+pnpm run package
+```
+
+### Build Process
+
+1. **TypeScript Compilation**: Source code compiled to JavaScript
+2. **Webview Build**: Svelte frontend bundled with Vite
+3. **Extension Bundle**: Everything packaged with esbuild
+4. **VSIX Creation**: Final `.vsix` package for distribution
+
+## Code Style & Quality
+
+### Linting
+
+```bash
+# Check code style
+pnpm run lint
+
+# Fix auto-fixable issues
+pnpm run lint:fix
+```
+
+### Type Checking
+
+```bash
+# Run TypeScript type checking
+pnpm run typecheck
+```
+
+### Code Style Guidelines
+
+- Follow existing TypeScript/Svelte conventions
+- Use meaningful variable and function names
+- Write self-documenting code with clear intent
+- Follow the Clean Architecture dependency rules
+
+## Contributing Workflow
+
+### 1. Choose an Issue
+- Browse [GitHub Issues](https://github.com/gitorial-sdk/gitorial-vscode.git/issues)
+- Look for issues labeled `good first issue` or `help wanted`
+- Comment on issues you're interested in
+
+### 2. Create a Branch
+```bash
+git checkout -b feature/amazing-new-feature
+```
+
+### 3. Make Changes
+- Follow the established code patterns
+- Add tests for new functionality
+- Update documentation if needed
+
+### 4. Test Thoroughly
+```bash
+pnpm run test
+pnpm run lint
+pnpm run typecheck
+```
+
+### 5. Submit a Pull Request
+- Push your branch to GitHub
+- Create a detailed pull request description
+- Reference related issues
+- Be responsive to feedback
+
+## Educational Content Detection
+
+The extension automatically detects educational patterns in code:
+
+```typescript
+// These patterns trigger special handling
+const EDUCATIONAL_PATTERNS = [
+  'TODO:', 'FIXME:', 'unimplemented!()',
+  'todo!()', '???', '/* ... implement ... */'
+];
+```
+
+## Performance Considerations
+
+### Optimization Guidelines
+
+- **Lazy Loading**: Load heavy operations only when needed
+- **Debouncing**: Debounce frequent operations like file watching
+- **Memory Management**: Properly dispose of VS Code resources
+- **Bundle Size**: Monitor and optimize extension bundle size
+
+### Debugging Performance
+
+- Use VS Code's built-in performance tools
+- Monitor memory usage in Extension Development Host
+- Profile slow operations with built-in timers
+
+## Resources & Support
+
+### Documentation
+- [VS Code Extension API](https://code.visualstudio.com/api)
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+- [Svelte Documentation](https://svelte.dev/docs)
+
+### Community
+- [GitHub Issues](https://github.com/gitorial-sdk/gitorial-vscode.git/issues) - Bug reports and feature requests
+- [Discussions](https://github.com/gitorial-sdk/gitorial-vscode.git/discussions) - Community discussions
+
+### Getting Help
+- Check existing issues for similar problems
+- Search the codebase for related functionality
+- Ask questions in GitHub Discussions
+
+## Version History
+
+### v0.2.2 (Current)
+- Enhanced tutorial navigation
+- Improved content rendering
+- Better VS Code integration
+- Performance optimizations
+
+### v0.2.1
+- Bug fixes and stability improvements
+- Enhanced error handling
+- Updated dependencies
+
+### v0.2.0
+- Major architecture improvements
+- New tutorial features
+- Enhanced developer experience
+
+---
+
+Thank you for your interest in contributing to Gitorial! Your contributions help make interactive learning more accessible for developers worldwide.

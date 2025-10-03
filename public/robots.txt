@@ -1,1 +1,13 @@
 Sitemap: https://gitorial-sdk.com/sitemap-index.xml
+
+User-agent: *
+Allow: /
+
+# Disallow common sensitive paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /pagefind/
+
+# Allow crawling of documentation
+Allow: /docs/

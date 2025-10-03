@@ -1,6 +1,6 @@
 /**
  * * Configuration of the i18n system data files and text translations
- * Example translations below are for English and French, with textTranslations used in src/layouts/BlogLayoutCenter.astro and src/components/hero/[hero].astro
+ * English-only configuration for Gitorial documentation
  */
 
 /**
@@ -11,10 +11,6 @@ import navDataEn from "./en/navData.json";
 import sidebarNavDataEn from "./en/sidebarNavData.json";
 import siteDataEn from "./en/siteData.json";
 import testimonialDataEn from "./en/testimonialData.json";
-import navDataFr from "./fr/navData.json";
-import sidebarNavDataFr from "./fr/sidebarNavData.json";
-import siteDataFr from "./fr/siteData.json";
-import testimonialDataFr from "./fr/testimonialData.json";
 
 export const dataTranslations = {
   en: {
@@ -22,12 +18,6 @@ export const dataTranslations = {
     navData: navDataEn,
     sidebarNavData: sidebarNavDataEn,
     testimonialData: testimonialDataEn,
-  },
-  fr: {
-    siteData: siteDataFr,
-    navData: navDataFr,
-    sidebarNavData: sidebarNavDataFr,
-    testimonialData: testimonialDataFr,
   },
 } as const;
 
@@ -48,15 +38,9 @@ export const dataTranslations = {
  */
 export const textTranslations = {
   en: {
-    hero_title: "Introducing Gitorial",
-    hero_description: `A modern, fast, and feature-rich documentation theme built with Astro v5 and Tailwind CSS v4. This theme is the documentation for itself, explore and learn!`,
+    hero_title: "Interactive Learning Through Code",
+    hero_description: "Learn coding concepts through guided, hands-on experiences with the Gitorial VS Code extension. Navigate tutorials like Git commits and master new technologies step by step.",
     back_to_all_posts: "Back to all posts",
-  },
-  fr: {
-    hero_title: "Introducing Gitorial",
-    hero_description:
-      "Je ne parle pas vraiment français donc j'utilise Google Translate pour quelques parties de cette démo.",
-    back_to_all_posts: "Retour à tous les articles",
   },
 } as const;
 
@@ -78,12 +62,6 @@ export const routeTranslations = {
     docsKey2: "docs/*",
     docsKey3: "docs",
   },
-  fr: {
-    overviewKey: "apercu",
-    docsKey1: "docs",
-    docsKey2: "docs",
-    docsKey3: "docs/*",
-  },
 } as const;
 
 /**
@@ -99,7 +77,6 @@ export const routeTranslations = {
 export const localizedCollections = {
   docs: {
 		en: "docs",
-		fr: "docs"
 	},
   // Add more collections/locales as needed
 } as const;

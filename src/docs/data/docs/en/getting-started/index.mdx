@@ -1,32 +1,95 @@
 ---
-title: Welcome to Solstice
-description: Learn about the Documentation Theme and its key features
+title: "Getting Started"
+description: "Get started with the Gitorial VS Code extension for interactive coding tutorials."
+tab: main
 sidebar:
+  label: "Overview"
   order: 1
-  label: Introduction
+pagefind: true
 ---
 
-Solstice is a modern, fast, and feature-rich documentation template built with Astro v5 and Tailwind CSS v4. It's designed to help you create beautiful and functional documentation websites with minimal setup.
+# Getting Started with Gitorial
 
-<Aside variant="tip">
-  This template can be a standalone docs site, or easily integrated with other templates by Cosmic Themes.
-</Aside>
+Welcome to Gitorial, a VS Code extension that enables interactive, step-by-step coding tutorials directly in your editor. Learn coding concepts, frameworks, and best practices through guided, hands-on experiences.
 
-## Key Features
+## What is Gitorial?
 
-- **I18n support** - Full i18n capabilities with a simple config script
-- **Useful Components** - Pre-built components to help you create exceptional documentation, including:
-  - [Asides](/docs/components/aside)
-  - [Tabs](/docs/components/tabs)
-  - [Steps](/docs/components/steps)
-  - [Buttons](/docs/components/button)
-  - [Badges](/docs/components/badge)
-- **Modern design** - Clean, modern interface with Tailwind CSS v4
-- **Fully responsive** - Looks great on all devices
-- **Search functionality** - Help users find content quickly with integrated Pagefind search
-- **Dark mode** - Built-in dark mode support
-- **Customizable** - Easy to modify and extend
+Gitorial is an interactive learning platform that transforms Git repositories into step-by-step coding tutorials. Each tutorial step is a Git commit that you can navigate, edit, and learn from within VS Code.
 
-## Getting Started
+## Quick Installation
 
-Check out the [Theme Integration Guide](/docs/getting-started/integrating) guide to begin using Solstice Theme with another template by Cosmic Themes.
+### From VS Code Marketplace
+
+1. Open VS Code
+2. Go to the Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X`)
+3. Search for **"Gitorial"**
+4. Click **Install**
+
+### Manual Installation
+
+1. Download the latest `.vsix` file from the [releases page](https://github.com/gitorial-sdk/gitorial-vscode.git/releases)
+2. In VS Code, run `Extensions: Install from VSIX...` from the command palette
+3. Select the downloaded `.vsix` file
+
+## Your First Tutorial
+
+### 1. Clone a Tutorial
+
+Open the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and run:
+
+```
+Gitorial: Clone New Tutorial
+```
+
+Enter the Git URL of a tutorial repository and select where to clone it.
+
+### 2. Open the Tutorial
+
+The extension will automatically:
+- Clone the repository into a new folder
+- Open a new VS Code window with the tutorial
+- Load the Gitorial panel
+
+### 3. Navigate Through Steps
+
+Use the Gitorial panel to:
+- **Next Step**: Move forward through tutorial steps
+- **Previous Step**: Go back to review previous steps
+- **Jump to Step**: Navigate directly to any step
+- **View Solutions**: Compare your work with step solutions
+
+## Basic Usage
+
+### Tutorial Panel
+
+The Gitorial panel provides:
+- **Step Navigation**: Move between tutorial steps
+- **Content View**: Rendered Markdown for each step
+- **Progress Tracking**: Visual progress indicator
+- **File Management**: Automatic file opening for each step
+
+### Git Integration
+
+Gitorial uses Git commits as tutorial steps:
+- Each step represents a specific code change
+- Navigate between steps like Git commits
+- See exactly what changed in each step
+- Reset to any previous step if needed
+
+### VS Code Integration
+
+The extension integrates seamlessly with VS Code:
+- **Editor Management**: Automatically opens relevant files
+- **Tab Tracking**: Keeps track of open files per step
+- **Diff Views**: Compare your changes with solutions
+- **Persistent State**: Remembers your progress across sessions
+
+## Next Steps
+
+Now that you're familiar with the basics:
+
+1. **Explore Features** - Learn about advanced Gitorial capabilities
+2. **Create Tutorials** - Start authoring your own interactive tutorials
+3. **Contribute** - Join the Gitorial development community
+
+Ready to dive deeper? Check out the [Features](/docs/features/) section to learn about all the powerful capabilities Gitorial offers.
