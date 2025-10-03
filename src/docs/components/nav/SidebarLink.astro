@@ -29,7 +29,7 @@ const { link, text, badge } = Astro.props;
 const currLocale = getLocaleFromUrl(Astro.url);
 
 // internal link, so we need to add the locale to the link
-let actualLink = getLocalizedRoute(currLocale, link);
+let actualLink = link;
 
 const currentPath = comparePathsWithTrailingSlash(Astro.url.pathname, actualLink);
 ---

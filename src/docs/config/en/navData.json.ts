@@ -15,8 +15,8 @@ const navConfig: navItem[] = [
     link: "/docs/components/",
   },
   {
-    text: "Get Solstice",
-    link: "https://cosmicthemes.com/themes/solstice",
+    text: "Get Gitorial",
+    link: "https://cosmicthemes.com/themes/Gitorial",
     newTab: true,
   },
 ];

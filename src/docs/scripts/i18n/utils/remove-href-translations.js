@@ -16,7 +16,7 @@ async function removeHrefTranslations(logging = false) {
                 const originalContent = content;
                 // Remove the import statement if it exists while preserving newlines
                 content = content.replace(/import\s*{\s*getRelativeLocaleUrl\s*}\s*from\s*["']astro:i18n["']\s*;?\s*/g, "\n");
-                // replace cases that look like getRelativeLocaleUrl(currLocale) with "/"
+                // replace cases that look like "/" with "/"
                 content = content.replace(/getRelativeLocaleUrl\s*\(\s*\w+\s*\)/g, '"/"');
                 // Replace getRelativeLocaleUrl with direct paths, handling both variables and literals
                 content = content.replace(/getRelativeLocaleUrl\s*\(\s*\w+\s*,\s*((?:`[^`]*`|'[^']*'|"[^"]*"|[^,)]+))(?:\s*,\s*[^)]+)?\s*\)/g, (match, path) => {

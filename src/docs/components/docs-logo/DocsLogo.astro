@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-import Logo from "@/assets/images/logo.svg";
+import Logo from "@/assets/images/logo.png";
 import { getLocaleFromUrl } from "@/docs/js/localeUtils";
 import { getLocalizedRoute } from "@/docs/js/translationUtils";
 import { getTranslatedData } from "@/docs/js/translationUtils";
@@ -15,6 +15,6 @@ const siteData = getTranslatedData("siteData", currLocale);
   href={getLocalizedRoute(currLocale)}
   class=""
 >
-  <Logo class="size-6 opacity-90" />
+  <Image src={Logo} alt={siteData.title} class="size-6 opacity-90" />
   <div class="">{siteData.title}</div>
 </a>

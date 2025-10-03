@@ -15,11 +15,11 @@ const copySvg = createInlineSvgUrl(
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://solstice.cosmicthemes.com",
+  site: "https://gitorial-sdk.com",
   // i18n configuration must match src/docs/config/translationData.json.ts
   i18n: {
     defaultLocale: "en",
-    locales: ["en", "fr"],
+    locales: ["en"],
     routing: {
       prefixDefaultLocale: false,
     },

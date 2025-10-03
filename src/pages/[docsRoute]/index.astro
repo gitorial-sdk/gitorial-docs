@@ -12,7 +12,7 @@ import DocsLandingLayout from "@/docs/layouts/DocsLandingLayout.astro";
 
 export async function getStaticPaths() {
   // replace any starting or ending slashes, then remove anything before the first slash remaining if necessary
-  const localizedDocsRoute = getLocalizedRoute(defaultLocale, docsRoute)
+  const localizedDocsRoute = docsRoute
     .replace(/^\/|\/$/g, "")
     .replace(/^[^/]+\//, "");
 

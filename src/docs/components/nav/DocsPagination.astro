@@ -26,7 +26,7 @@ const { prev, next } = Astro.props;
   {
     prev && (
       <a
-        href={getLocalizedRoute(currLocale, `/${docsRoute}/${prev.slug}`)}
+        href={`/${docsRoute}/${prev.slug}`}
         class="text-foreground hover:bg-muted text-md flex items-center gap-2 rounded-md px-2.5 py-1.5 font-medium transition-colors"
       >
         <ChevronLeft class="text-accent size-5 transition-transform" />
@@ -38,7 +38,7 @@ const { prev, next } = Astro.props;
   {
     next && (
       <a
-        href={getLocalizedRoute(currLocale, `/${docsRoute}/${next.slug}`)}
+        href={`/${docsRoute}/${next.slug}`}
         class="text-foreground hover:bg-muted text-md flex items-center gap-2 rounded-md px-2.5 py-1.5 font-medium transition-colors"
       >
         {next.title}

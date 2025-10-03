@@ -38,26 +38,22 @@ export const dataTranslations = {
  *
  * ```ts
  * import { getLocaleFromUrl } from "@/docs/js/localeUtils";
- * import { useTranslations } from "@/docs/js/translationUtils";
- * const currLocale = getLocaleFromUrl(Astro.url);
- * const t = useTranslations(currLocale);
- * t("back_to_all_posts"); // this would be "Retour à tous les articles" if the current locale is "fr"
+ * * const currLocale = getLocaleFromUrl(Astro.url);
+ * * t("back_to_all_posts"); // this would be "Retour à tous les articles" if the current locale is "fr"
  * ```
  * or
  * ```ts
- * import { useTranslations } from "@/docs/js/translationUtils";
- * const t = useTranslations("fr");
- * t("back_to_all_posts"); // this would be "Retour à tous les articles"
+ * * * t("back_to_all_posts"); // this would be "Retour à tous les articles"
  * ```
  */
 export const textTranslations = {
   en: {
-    hero_title: "Introducing Solstice",
+    hero_title: "Introducing Gitorial",
     hero_description: `A modern, fast, and feature-rich documentation theme built with Astro v5 and Tailwind CSS v4. This theme is the documentation for itself, explore and learn!`,
     back_to_all_posts: "Back to all posts",
   },
   fr: {
-    hero_title: "Introducing Solstice",
+    hero_title: "Introducing Gitorial",
     hero_description:
       "Je ne parle pas vraiment français donc j'utilise Google Translate pour quelques parties de cette démo.",
     back_to_all_posts: "Retour à tous les articles",
@@ -102,8 +98,8 @@ export const routeTranslations = {
  */
 export const localizedCollections = {
   docs: {
-    en: "docs",
-    fr: "docs",
-  },
+		en: "docs",
+		fr: "docs"
+	},
   // Add more collections/locales as needed
 } as const;

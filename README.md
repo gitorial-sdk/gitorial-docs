@@ -1,4 +1,4 @@
-# Welcome to Solstice!
+# Welcome to Gitorial SDK Docs!
 
 This theme uses Astro v5 and Tailwind CSS v4. It is designed so that it can be used as a standalone docs site, but it is also designed to easily integrate with other templates by Cosmic Themes.
 

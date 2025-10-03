@@ -35,7 +35,7 @@ if (!link.includes(domain) && !link.startsWith("/") && !link.startsWith("#")) {
   actualLink = link;
 } else {
   // internal link, so we need to add the locale to the link
-  actualLink = getLocalizedRoute(currLocale, link);
+  actualLink = link;
 }
 
 const currentPath = comparePathsWithTrailingSlash(Astro.url.pathname, actualLink);
