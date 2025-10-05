@@ -1,0 +1,22 @@
+---
+title: "Gitorial Authoring - Editing Steps"
+description: ""
+tab: "main"
+sidebar:
+  label: "Editing Steps"
+  order: 3
+pagefind: true
+---
+
+# Edit Steps
+
+We want to check out a commit $X$ and edit it.
+Let's call this edit $Delta_x$ (delta at position $x$.
+
+If any later $Delta_{x+i}$ changes a portion of $Delta_x$, we run into a conflict. The user needs to go through all subsequent conflicts
+and adjust them manually.
+
+This can happen an arbitrary number of times — the user can change a commit,
+resolve conflicts, and perform further edits - which again might trigger a conflict.
+
+At some point the tutorial is at a satisfactory state and we can move on to Pull Requests.

@@ -39,7 +39,8 @@ export const dataTranslations = {
 export const textTranslations = {
   en: {
     hero_title: "Interactive Learning Through Code",
-    hero_description: "Learn coding concepts through guided, hands-on experiences with the Gitorial VS Code extension. Navigate tutorials like Git commits and master new technologies step by step.",
+    hero_description:
+      "Learn coding concepts through guided, hands-on experiences with the Gitorial VS Code extension. Navigate tutorials like Git commits and master new technologies step by step.",
     back_to_all_posts: "Back to all posts",
   },
 } as const;
@@ -76,7 +77,7 @@ export const routeTranslations = {
  */
 export const localizedCollections = {
   docs: {
-		en: "docs",
-	},
+    en: "docs",
+  },
   // Add more collections/locales as needed
 } as const;

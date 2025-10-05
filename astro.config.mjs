@@ -7,6 +7,8 @@ import { defineConfig } from "astro/config";
 import AutoImport from "astro-auto-import";
 import expressiveCode, { createInlineSvgUrl } from "astro-expressive-code";
 import icon from "astro-icon";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 
 // tabler icons "clipboard-check"
 const copySvg = createInlineSvgUrl(
@@ -17,6 +19,10 @@ const copySvg = createInlineSvgUrl(
 export default defineConfig({
   site: "https://gitorial-sdk.com",
   // i18n configuration must match src/docs/config/translationData.json.ts
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [[rehypeKatex, {}]],
+  },
   i18n: {
     defaultLocale: "en",
     locales: ["en"],

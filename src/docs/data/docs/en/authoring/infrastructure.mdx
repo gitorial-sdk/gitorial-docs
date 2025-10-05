@@ -1,0 +1,28 @@
+---
+title: "Gitorial Authoring - Infrastructure"
+description: ""
+tab: "main"
+sidebar:
+  label: "Infrastructure"
+  order: 5
+pagefind: true
+---
+
+## Infrastructure
+
+The difficult question now is how to achieve all this magic. What will be our backbone and high level pipeline? Lets dive deep into answering this question.
+
+### Bend Git to Our Will
+
+How will this all look like in practise?
+
+we have a folded and a unfolded state. The user checks out x at the folded state. Makes changes and the changes propagate to unfolded step x. Both states need to co-existing during authoring. This is a great use-case of Git Worktrees.
+
+\{Inc IMG of what a Git Worktree Is\}
+
+It would look like this
+
+1) Create folded from unfolded
+2) Create a two-way sync
+3) Apply changes to folded (to catch and resolve conflicts)
+4) After each successful edition -> save (which syncs)

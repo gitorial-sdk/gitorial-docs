@@ -30,12 +30,15 @@ The official documentation site for **Gitorial**, a VS Code extension that enabl
 ## 📚 Documentation Sections
 
 ### [Getting Started](/docs/getting-started/)
+
 Learn the basics of using Gitorial, from installation to your first tutorial experience.
 
 ### [Features](/docs/features/)
+
 Explore all the powerful features that make Gitorial an exceptional learning platform.
 
 ### [Development](/docs/development/)
+
 Contribute to the Gitorial ecosystem and help build the future of interactive learning.
 
 ## 🏗️ Technical Architecture
@@ -49,6 +52,7 @@ Gitorial follows a **Clean Architecture** pattern with three distinct layers:
 ## 🛠️ Development
 
 ### Prerequisites
+
 - Node.js v20+
 - pnpm v10+
 - VS Code v1.87+

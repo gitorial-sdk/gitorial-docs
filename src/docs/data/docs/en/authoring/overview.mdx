@@ -1,0 +1,24 @@
+---
+title: "Gitorial - Authoring"
+description: "Together we explore how to setup a author mode for Gitorials. Concretely this means providing a user friendly way to reach two targets: 1) Easy PR's 2) Easy Edit."
+tab: "main"
+sidebar:
+  label: "Overview"
+  order: 1
+pagefind: true
+---
+
+
+I'll assume the reader is familar with what Gitorial is. If not, I highly recommend having a look at [here](https://github.com/gitorial-sdk/gitorial-vscode).
+To explain Gitorial in one sentence, I'd say: "Its a interative coding tutorial utilizing git commits as steps". Sounds simple, and actually it is - for as long as editing of steps (= commits) doesn't come into play.
+
+
+## Goals
+Our targets are...
+
+A) Easy way to edit steps
+
+B) Easy to open and review PR's
+
+
+Before we dive into definitng the goals, we need to define two important states which will be important to create the authoring feature. The **Unfolded** and **Folded**.

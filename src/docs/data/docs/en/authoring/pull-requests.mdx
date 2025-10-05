@@ -1,0 +1,15 @@
+---
+title: "Gitorial Authoring - Pull Requests"
+description: ""
+tab: "main"
+sidebar:
+  label: "Pull Requests"
+  order: 4
+pagefind: true
+---
+
+# Pull Requests
+PR's are new commits queued to be merged into a remote branch. In Gitorials case this can not be different, but we can introduce some abstractions. For the Reviewer and Creator we want a step-by-step view. Like: "Here are the steps that changed!". There will be a change Δ at step x. Despite the fact that step x..n changed with Δ, only step x should be highlighted. Subsequent steps which had a conflict at x + k should get highlighted as well.
+
+
+PR Reviews on on the other hand are going to be displayed on Github. On the unfolded state. They will not be as nice as the opening of them. But if we plan to design a perfect system, we might want to just revert the function here. If we earlier were able to go from a mapping from Folded -> Unfolded, now we should be able to go from Unfolded -> Folded. Like import the Unfolded, build out the folded and check against remote.

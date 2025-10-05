@@ -1,0 +1,33 @@
+---
+title: "Gitorial Authoring - Folded vs Unfolded"
+description: ""
+tab: "main"
+sidebar:
+  label: "Unfolded vs Folded"
+  order: 2
+pagefind: true
+---
+
+## Folded
+
+A folded state is a sequence of commits, each commit captures a step forming a consequitive line of steps going from start -> end of the tutorial. This is the natural state of what we understand of what a Gitorial is.
+
+![Folded View - VS Code](./assets/folded.png)
+
+## Unfolded
+
+To operate on git we will need some kind of 'unfolded' state. In our case we will commit all steps into folders called 'step x'. Each of them will contain the complete repo of the specific step (ugh! Potential For Improvement!), thus when the user edits step x, we can easily map the changes to folder 'step x' in the unfolded state. This state is handy to PR against. But thats its only use case. Lay out the steps, apply changes and PR. Done. No need to further keep it - However it is to be noted, that this is for now our source of truth.
+
+![Unfolded View - VS Code](./assets/unfolded.png)
+
+#### gitorial_metadata.json
+Unfolded becomes our source of truth, however It does not yet carry all necessary information to build a folded-state. What we need further is the commit message of each step. For this reason `gitorial_metadata.json` gets introduced. The Schema is simple.
+
+```ts
+interface GitorialMetadata {
+  _Note: "This file will not be include din your final gitorial.";
+  commitMessage: string;
+}
+```
+
+This file will be automatically generated and does not require manual edition.

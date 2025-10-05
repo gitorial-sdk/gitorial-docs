@@ -33,9 +33,7 @@ export async function getStaticPaths() {
   const documentationTabs = sidebarData.tabs;
 
   // replace any starting or ending slashes, then remove anything before the first slash remaining if necessary
-  const localizedDocsRoute = docsRoute
-    .replace(/^\/|\/$/g, "")
-    .replace(/^[^/]+\//, "");
+  const localizedDocsRoute = docsRoute.replace(/^\/|\/$/g, "").replace(/^[^/]+\//, "");
 
   // Create paths for each docs tab
   const paths: any[] = [];
