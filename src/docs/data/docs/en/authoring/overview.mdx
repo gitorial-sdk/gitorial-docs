@@ -1,6 +1,6 @@
 ---
 title: "Gitorial - Authoring"
-description: "Together we explore how to setup a author mode for Gitorials. Concretely this means providing a user friendly way to reach two targets: 1) Easy PR's 2) Easy Edit."
+description: "How to author Gitorials effectively: edit steps confidently and open great PRs."
 tab: "main"
 sidebar:
   label: "Overview"
@@ -8,17 +8,52 @@ sidebar:
 pagefind: true
 ---
 
+Gitorial is an interactive coding tutorial format that uses Git commits as the "steps" of a narrative. Authoring is everything you do to create and refine those steps so learners experience a smooth, incremental journey.
 
-I'll assume the reader is familar with what Gitorial is. If not, I highly recommend having a look at [here](https://github.com/gitorial-sdk/gitorial-vscode).
-To explain Gitorial in one sentence, I'd say: "Its a interative coding tutorial utilizing git commits as steps". Sounds simple, and actually it is - for as long as editing of steps (= commits) doesn't come into play.
+## What authoring aims to solve
 
+- **Easy step edits:** Make precise changes to any step without losing continuity across the tutorial.
+- **Easy pull requests:** Package changes so reviewers see exactly which steps changed and why.
 
-## Goals
-Our targets are...
+To make this work, we rely on two complementary representations of your tutorial:
 
-A) Easy way to edit steps
+- **Folded:** the “final” story - a linear chain of commits, one per step. This is where you edit.
+- **Unfolded:** a file-system view - one folder per step, each containing the full repo for that point in time. This is a shadow used to structure PRs.
 
-B) Easy to open and review PR's
+![Split view — left: Folded commit diff; right: corresponding Unfolded `step-03` folder](./assets/folded-unfolded-split-view.svg)
 
+You won't actively switch between these two views during authoring. Unfolded behaves like a shadow state - hidden but necessary for proper alignment with Git and for producing step-structured PRs. See ["Unfolded vs Folded"](./folded-unfolded) for details on how they map to each other.
 
-Before we dive into definitng the goals, we need to define two important states which will be important to create the authoring feature. The **Unfolded** and **Folded**.
+## End-to-End Authoring Flow
+
+The following sequence describes how an author creates, edits, and publishes a Gitorial tutorial.
+
+1. **Start an authoring session**<br/>
+   The extension prepares the authoring environment by utilizing git worktrees. Initially only a worktree for the **Folded** state gets created.
+
+2. **Edit steps**<br/>
+   Authors make changes directly in the **Folded view** — for example, checking out and editing the commit for step _N_.
+   Each edit modifies the underlying commit sequence that defines the tutorial timeline.
+
+3. **Resolve conflicts (if any)**<br/>
+   If downstream steps depend on content that changed in an earlier step, the authoring interface will guide the user through resolving those conflicts one by one.
+
+4. **Validate the story**<br/>
+   Once edits are complete, the author can preview the tutorial flow from start to finish.
+   Validation may include running tests, executing build checks, or ensuring that each step logically follows from the previous one.
+
+5. **Create PR-ready structure**<br/>
+   When the Gitorial is in a valid state, the author explicitly triggers a **"Create PR-ready structure"** action.
+   This process expands the **Folded** state into an **Unfolded** representation, where each step is written to a corresponding `step-N/` folder.
+   The generated structure lives locally and can be inspected before publication.
+
+6. **Open a pull request**<br/>
+   Once satisfied, the author opens a **PR** for the unfolded state.
+
+```mermaid
+flowchart LR
+  A["Start<br/>Session"] --> B["Edit<br/>in Folded"]
+  B --> C["Validate<br/>Tutorial"]
+  C --> D["Generate<br/>Unfolded"]
+  D --> E["Open<br/>Pull Request"]
+```

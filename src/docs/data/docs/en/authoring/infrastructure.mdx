@@ -10,19 +10,46 @@ pagefind: true
 
 ## Infrastructure
 
-The difficult question now is how to achieve all this magic. What will be our backbone and high level pipeline? Lets dive deep into answering this question.
+Authoring relies on a small set of robust mechanisms: Git worktrees, a Folded↔Unfolded sync engine, and metadata. Together they let authors iterate quickly while keeping the final tutorial a clean chain of commits.
 
 ### Bend Git to Our Will
 
-How will this all look like in practise?
+We keep two synchronized views of the same tutorial:
+- Folded: the commit timeline (editing source)
+- Unfolded: one folder per step (PR shadow)
 
-we have a folded and a unfolded state. The user checks out x at the folded state. Makes changes and the changes propagate to unfolded step x. Both states need to co-existing during authoring. This is a great use-case of Git Worktrees.
+Git worktrees let these views co-exist as separate checkouts that point at the same repository object database. This enables fast switching and deterministic rebuilds.
 
-\{Inc IMG of what a Git Worktree Is\}
+![Worktrees diagram — show repo with two worktrees: Folded (edit) and Unfolded (PR shadow), arrows indicating sync](./assets/placeholder.png)
 
-It would look like this
+### Sync engine
+The sync engine does the mechanical work:
+- Build Unfolded from Folded (on demand): materialize `step-N/` folders by replaying commits
+- Build Folded from Unfolded: transform per-step folders into a linear commit history (used when importing PR branches back to Folded)
+- Track metadata: commit messages and future annotations live alongside content
+- Detect impacts: identify downstream steps that may be affected by a change
 
-1) Create folded from unfolded
-2) Create a two-way sync
-3) Apply changes to folded (to catch and resolve conflicts)
-4) After each successful edition -> save (which syncs)
+Under the hood, the engine constructs diffs for each `step-N/…` and applies them to the corresponding Folded commit. Conflicts are surfaced early with precise context.
+
+![Sync flow — show two arrows: Folded → Unfolded (replay), Unfolded → Folded (synthesize commits)](./assets/placeholder.png)
+
+### Operations overview
+1) Initialize authoring
+   - Create/attach two worktrees (Folded, Unfolded)
+   - Generate `gitorial_metadata.json` where needed
+2) Edit
+   - Make edits in Folded; queue validations
+3) Validate
+   - Run tests/linters; verify Unfolded→Folded reconstruction
+4) Create PR-ready structure
+   - Generate Unfolded `step-N/` folders from Folded; produce step-aware summaries and diffs
+
+### Implementation notes
+- Worktrees avoid expensive cloning and allow independent index/state per view
+- Large binary assets should be deduplicated using the VCS where possible
+- Consistent line endings and formatting reduce noisy diffs across steps
+
+### Suggested visuals to embed
+![CLI snapshot — `git worktree list` showing two entries: folded/, unfolded/](./assets/placeholder.png)
+
+![Timeline synthesis — per-step diffs being stitched into commits 1..N](./assets/placeholder.png)

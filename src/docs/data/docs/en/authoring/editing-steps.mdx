@@ -8,15 +8,41 @@ sidebar:
 pagefind: true
 ---
 
-# Edit Steps
+## Editing steps
 
-We want to check out a commit $X$ and edit it.
-Let's call this edit $Delta_x$ (delta at position $x$.
+You can edit any step in isolation while keeping the overall narrative intact. Edits are performed in the Folded view; when ready, generate the Unfolded PR structure from the current Folded timeline.
 
-If any later $Delta_{x+i}$ changes a portion of $Delta_x$, we run into a conflict. The user needs to go through all subsequent conflicts
-and adjust them manually.
+### Prerequisites
+- Authoring session is started (Folded and Unfolded worktrees are ready)
+- You understand how Folded maps to Unfolded steps
 
-This can happen an arbitrary number of times — the user can change a commit,
-resolve conflicts, and perform further edits - which again might trigger a conflict.
+### Step-by-step
+1) Choose the step to edit
+   - Open the commit for step N in the Folded timeline (use the extension’s navigator).
+   - Optionally preview the corresponding Unfolded `step-N/` for PR context.
+2) Make changes
+   - Edit code, docs, and assets as part of the Folded step N commit.
+   - Update the commit message via the UI; metadata is mirrored into `gitorial_metadata.json`.
+3) Save and (later) generate PR structure
+   - Save your edits; when you want to review or publish, trigger "Create PR-ready structure" to materialize Unfolded `step-N/` folders.
+4) Validate locally
+   - Run tests/linters and skim the diff to ensure the step still teaches the intended concept.
+5) Repeat for other steps
+   - Continue editing additional steps as needed.
 
-At some point the tutorial is at a satisfactory state and we can move on to Pull Requests.
+### Conflicts and cascading changes
+Let’s call your change at step x the delta $\Delta_x$. If a later step modifies the same lines (or depends on the previous behavior), your changes may cause conflicts in steps $x+1\ldots n$. The authoring experience guides you to resolve them in order:
+- Show the earliest impacted step and the exact conflict.
+- Offer suggested resolutions when the intent is clear (e.g., renamed symbol).
+- After resolving, re-run validations, then continue to the next impacted step.
+
+![Conflict resolution flow — show: edit step x → detect impact on x+1 → guided resolution → continue](./assets/placeholder.png)
+
+### Tips for maintainable steps
+- Teach one idea per step; avoid noisy diffs.
+- Prefer renames over copy/paste; they’re easier to track and resolve.
+- Keep tests green at every step where possible.
+- Use metadata to keep commit messages short, descriptive, and learner-focused.
+
+### When you’re done
+Once the tutorial reads well and validations pass, move on to opening a pull request to share changes with reviewers.

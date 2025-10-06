@@ -8,8 +8,38 @@ sidebar:
 pagefind: true
 ---
 
-# Pull Requests
-PR's are new commits queued to be merged into a remote branch. In Gitorials case this can not be different, but we can introduce some abstractions. For the Reviewer and Creator we want a step-by-step view. Like: "Here are the steps that changed!". There will be a change Δ at step x. Despite the fact that step x..n changed with Δ, only step x should be highlighted. Subsequent steps which had a conflict at x + k should get highlighted as well.
+## Pull Requests
 
+Pull requests encapsulate your authoring changes and present them in a way that matches how readers experience the tutorial: step by step.
 
-PR Reviews on on the other hand are going to be displayed on Github. On the unfolded state. They will not be as nice as the opening of them. But if we plan to design a perfect system, we might want to just revert the function here. If we earlier were able to go from a mapping from Folded -> Unfolded, now we should be able to go from Unfolded -> Folded. Like import the Unfolded, build out the folded and check against remote.
+### Author flow
+1) Review your Folded changes and ensure they are coherent step-by-step.
+2) Trigger "Create PR-ready structure" to materialize Unfolded `step-N/` folders.
+3) From the authoring UI, choose “Open PR”.
+4) The PR is generated with step-aware context:
+   - A summary of which steps changed (e.g., steps 7 and 12)
+   - Per-step diffs that show exactly what learners will see change
+   - Links to open the Unfolded `step-N/` view for quick local repro
+
+### Reviewer flow
+On GitHub (or your forge of choice), reviewers can see:
+- A high-level summary of impacted steps
+- Per-step review checklists (e.g., Does the step teach one idea? Are tests green?)
+- Conventional Git diffs, with links back to the Unfolded folders for context
+
+Even if $\Delta_x$ causes subsequent adjustments at $x+k$, only steps that truly changed content are highlighted as primary; downstream mechanical conflict resolutions are labeled accordingly.
+
+![PR summary — show a list of changed steps with badges and links to per-step diffs](./assets/placeholder.png)
+
+### Branching strategy
+- Feature branches per tutorial (or per large refactor)
+- One PR per coherent authoring change (ideally touching a small set of steps)
+- Keep the main branch always releasable
+
+### CI suggestions
+- Validate that Unfolded is rebuilt correctly from the current Folded timeline
+- Run tests/linters for each changed step
+- Generate a preview site or step-by-step viewer artifacts
+
+### Importing PRs back into authoring
+If review suggestions are made directly on GitHub, you can pull the branch locally, import changes to the Unfolded worktree, rebuild the Folded timeline, and continue authoring. The mapping is the same, just applied in reverse: Unfolded ⇄ Folded.

@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx";
+import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import compress from "@playform/compress";
@@ -9,6 +10,8 @@ import expressiveCode, { createInlineSvgUrl } from "astro-expressive-code";
 import icon from "astro-icon";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+
+import { rehypeMermaidPlugin } from "./src/docs/scripts/mermaid-plugin.js";
 
 // tabler icons "clipboard-check"
 const copySvg = createInlineSvgUrl(
@@ -21,7 +24,7 @@ export default defineConfig({
   // i18n configuration must match src/docs/config/translationData.json.ts
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [[rehypeKatex, {}]],
+    rehypePlugins: [[rehypeKatex, {}], rehypeMermaidPlugin],
   },
   i18n: {
     defaultLocale: "en",
@@ -43,6 +46,7 @@ export default defineConfig({
         "@/docs/components/mdx-components/TabsContent.astro",
         "@/docs/components/mdx-components/TabsList.astro",
         "@/docs/components/mdx-components/TabsTrigger.astro",
+        "@/docs/components/MermaidRenderer.tsx",
       ],
     }),
     expressiveCode({
@@ -88,6 +92,7 @@ export default defineConfig({
       Image: false, // astro:assets handles this. Enabling this can dramatically increase build times
       SVG: false, // astro-icon handles this
     }),
+    preact(),
   ],
 
   vite: {
