@@ -8,29 +8,43 @@ sidebar:
 pagefind: true
 ---
 
+import Steps from "@/docs/components/mdx-components/Steps.astro";
+
 ## Editing steps
 
 You can edit any step in isolation while keeping the overall narrative intact. Edits are performed in the Folded view; when ready, generate the Unfolded PR structure from the current Folded timeline.
 
-### Prerequisites
-
-- Authoring session is started (Folded and Unfolded worktrees are ready) !Is unfolded required to to co-exist?
-- You understand how Folded maps to Unfolded steps
-
 ### Step-by-step
 
-1. Choose the step to edit
-   - Open the commit for step N in the Folded timeline (use the extension’s navigator).
-   - Optionally preview the corresponding Unfolded `step-N/` for PR context.
-2. Make changes
-   - Edit code, docs, and assets as part of the Folded step N commit.
-   - Update the commit message via the UI; metadata is mirrored into `gitorial_metadata.json`.
-3. Save and (later) generate PR structure
-   - Save your edits; when you want to review or publish, trigger "Create PR-ready structure" to materialize Unfolded `step-N/` folders.
-4. Validate locally
-   - Run tests/linters and skim the diff to ensure the step still teaches the intended concept.
-5. Repeat for other steps
-   - Continue editing additional steps as needed.
+<Steps>
+1.  **Choose the step to edit**<br/>
+    The extension prepares the authoring environment by utilizing git worktrees. Initially only a worktree for the Folded state gets created. 
+    On the left side you will find a familiar panel to _'source control'_ called _'gitorial authoring'_. 
+    You can pick a step from the timeline by double clicking it. If there are any changes the menu will display them similar to the _'source control'_ panel.
+
+2.  **Edit steps**<br/>
+    Authors make changes directly in the Folded view - for example, selecting and editing the files for step _N_. 
+    Each edit modifies the underlying commit sequence that defines the tutorial timeline. Update the commit message via the UI.
+
+3.  **Resolve conflicts (if any)**<br/>
+    If downstream steps depend on content that changed in an earlier step, the authoring interface will guide the user through resolving those conflicts one by one.
+    See ordering rules like [Template must be followed by Solution](/docs/authoring/7validation#rule-TemplateMustBeFollowedBySolution) and [Solution must follow Template or Action](/docs/authoring/validation#rule-SolutionMustFollowTemplateOrAction).
+
+4.  **Validate the story**<br/>
+    Once edits are complete, the author can preview the tutorial flow from start to finish. 
+    Validation may include running tests, executing build checks, and skimming the diff to ensure each step still teaches the intended concept and logically follows from the previous one.
+    Content rules like [Section must change README](/docs/authoring/7validation#rule-SectionMustChangeReadme) help keep steps focused.
+
+5.  **Create PR-ready structure**<br/>
+    The author explicitly triggers a "Create PR-ready structure" action, which only executes when the timeline is in a valid state. 
+    In case of an error the error will be displayed for the user to fix (see [Validation](/docs/authoring/7validation)).
+    This process expands the Folded state into an Unfolded representation, where each step is written to a corresponding `steps/N/` folder. <br/>
+    The generated structure lives locally and can be inspected before publication.
+
+6.  **Open a pull request**<br/>
+    Once satisfied, the author opens a PR for the unfolded state.
+
+</Steps>
 
 ### Conflicts and cascading changes
 

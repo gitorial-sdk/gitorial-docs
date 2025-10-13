@@ -12,5 +12,6 @@
       "@images/*": ["src/assets/images/*"],
       "@videos/*": ["src/assets/videos/*"]
     }
-  }
+  },
+  "include": ["src/**/*"]
 }

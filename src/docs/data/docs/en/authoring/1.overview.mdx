@@ -26,7 +26,7 @@ You won't actively switch between these two views during authoring. Unfolded beh
 
 ## End-to-End Authoring Flow
 
-The following sequence describes how an author creates, edits, and publishes a Gitorial tutorial.
+The following diagram shows the high-level flow. For the detailed, canonical instructions on editing steps, see [Editing Steps](/docs/authoring/3editing-steps).
 
 ```mermaid
 flowchart LR
@@ -35,29 +35,3 @@ flowchart LR
   C --> D["Generate<br/>Unfolded"]
   D --> E["Open<br/>Pull Request"]
 ```
-
-<Steps>
-
-1. **Start an authoring session**<br/>
-   The extension prepares the authoring environment by utilizing git worktrees. Initially only a worktree for the Folded state gets created.
-
-2. **Edit steps**<br/>
-   Authors make changes directly in the Folded view — for example, checking out and editing the commit for step _N_.
-   Each edit modifies the underlying commit sequence that defines the tutorial timeline.
-
-3. **Resolve conflicts (if any)**<br/>
-   If downstream steps depend on content that changed in an earlier step, the authoring interface will guide the user through resolving those conflicts one by one.
-
-4. **Validate the story**<br/>
-   Once edits are complete, the author can preview the tutorial flow from start to finish.
-   Validation may include running tests, executing build checks, or ensuring that each step logically follows from the previous one.
-
-5. **Create PR-ready structure**<br/>
-   When the Gitorial is in a valid state, the author explicitly triggers a "Create PR-ready structure" action.
-   This process expands the Folded state into an Unfolded representation, where each step is written to a corresponding `steps/N/` folder. <br/>
-   The generated structure lives locally and can be inspected before publication.
-
-6. **Open a pull request**<br/>
-   Once satisfied, the author opens a PR for the unfolded state.
-
-</Steps>

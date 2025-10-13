@@ -1,0 +1,46 @@
+---
+import Rule from "./Rule.astro";
+
+interface RuleItem {
+  code: string;
+  title: string;
+  summary: string;
+  severity?: "error" | "warning";
+  rationale?: string;
+  validExample?: string;
+  invalidExample?: string;
+}
+
+interface Props {
+  heading: string;
+  anchor?: string;
+  rules: RuleItem[];
+}
+
+const { heading, anchor, rules } = Astro.props as Props;
+---
+
+<section id={anchor} class="rule-group my-8">
+  <h3 class="docs-h2 mb-6">{heading}</h3>
+  <div class="grid gap-4">
+    {rules.map((r) => (
+      <Rule
+        code={r.code}
+        title={r.title}
+        summary={r.summary}
+        severity={r.severity}
+        rationale={r.rationale}
+        validExample={r.validExample}
+        invalidExample={r.invalidExample}
+        anchorId={`rule-${r.code}`}
+      />
+    ))}
+  </div>
+</section>
+
+<style is:global>
+  @import "tailwindcss/theme" theme(reference);
+  @import "@/styles/tailwind-theme.css" theme(reference);
+</style>
+
+

@@ -52,7 +52,6 @@ export default defineConfig([
         extraFileExtensions: [".astro"],
         sourceType: "module",
         ecmaVersion: "latest",
-        project: "./tsconfig.json",
       },
     },
     rules: {

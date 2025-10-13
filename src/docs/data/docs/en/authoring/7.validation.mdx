@@ -1,0 +1,32 @@
+---
+title: "Gitorial Authoring - Validation"
+description: "Validation of the tutorial"
+tab: "main"
+sidebar:
+  label: "Validation"
+  order: 7
+pagefind: true
+---
+
+import Aside from "@/docs/components/mdx-components/Aside.astro"
+import RuleIndex from "@/docs/components/rules/RuleIndex.astro"
+import RuleGroup from "@/docs/components/rules/RuleGroup.astro"
+import { validationSections } from "@/docs/config/validationRules"
+
+## Validation
+
+<Aside variant="info" title="How validation works">
+These rules are evaluated when creating the PR-ready structure and surfaced inline during authoring to keep steps consistent.
+</Aside>
+
+<RuleIndex
+  groups={validationSections.map(section => ({
+    heading: section.name,
+    anchor: section.anchor,
+    items: section.rules.map(r => ({ code: r.code, title: r.title }))
+  }))}
+/>
+
+{validationSections.map(section => (
+  <RuleGroup heading={section.name} anchor={section.anchor} rules={section.rules} />
+))}

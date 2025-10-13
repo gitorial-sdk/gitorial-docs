@@ -1,0 +1,37 @@
+---
+interface Props {
+  groups: Array<{
+    heading: string;
+    anchor: string;
+    items: Array<{ code: string; title: string }>;
+  }>;
+}
+
+const { groups } = Astro.props as Props;
+---
+
+<nav class="rule-index my-6 rounded-lg border p-4">
+  <h3 class="mb-2 text-sm font-semibold">Rules Index</h3>
+  <ul class="grid gap-1 md:grid-cols-2">
+    {groups.map((g) => (
+      <li>
+        <div class="mb-1 mt-2 text-xs uppercase text-muted-foreground">{g.heading}</div>
+        <ul class="ml-3 list-disc">
+          {g.items.map((r) => (
+            <li>
+              <a class="text-primary underline-offset-2 hover:underline" href={`#rule-${r.code}`}>{r.title}</a>
+              <span class="ml-2 text-xs text-muted-foreground">({r.code})</span>
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style is:global>
+  @import "tailwindcss/theme" theme(reference);
+  @import "@/styles/tailwind-theme.css" theme(reference);
+</style>
+
+
