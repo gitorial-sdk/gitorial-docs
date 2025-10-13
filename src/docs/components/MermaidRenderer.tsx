@@ -28,11 +28,11 @@ export default function MermaidRenderer({ code, id }: MermaidRendererProps) {
           fontFamily: style.getPropertyValue("--font-sans").trim(),
           fontSize: style.getPropertyValue("--font-size-base").trim(),
           // Use lighter shades for better contrast
-          primaryColor: isDark 
-            ? getColor(style, "--color-primary-900")  // Dark purple for dark mode
+          primaryColor: isDark
+            ? getColor(style, "--color-primary-900") // Dark purple for dark mode
             : getColor(style, "--color-primary-100"), // Light purple for light mode
           primaryTextColor: isDark
-            ? getColor(style, "--color-primary-200")  // Light text on dark background
+            ? getColor(style, "--color-primary-200") // Light text on dark background
             : getColor(style, "--color-primary-900"), // Dark text on light background
           primaryBorderColor: isDark
             ? getColor(style, "--color-primary-700")

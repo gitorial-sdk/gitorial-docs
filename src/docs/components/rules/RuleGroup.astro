@@ -23,18 +23,20 @@ const { heading, anchor, rules } = Astro.props as Props;
 <section id={anchor} class="rule-group my-8">
   <h3 class="docs-h2 mb-6">{heading}</h3>
   <div class="grid gap-4">
-    {rules.map((r) => (
-      <Rule
-        code={r.code}
-        title={r.title}
-        summary={r.summary}
-        severity={r.severity}
-        rationale={r.rationale}
-        validExample={r.validExample}
-        invalidExample={r.invalidExample}
-        anchorId={`rule-${r.code}`}
-      />
-    ))}
+    {
+      rules.map((r) => (
+        <Rule
+          code={r.code}
+          title={r.title}
+          summary={r.summary}
+          severity={r.severity}
+          rationale={r.rationale}
+          validExample={r.validExample}
+          invalidExample={r.invalidExample}
+          anchorId={`rule-${r.code}`}
+        />
+      ))
+    }
   </div>
 </section>
 
@@ -42,5 +44,3 @@ const { heading, anchor, rules } = Astro.props as Props;
   @import "tailwindcss/theme" theme(reference);
   @import "@/styles/tailwind-theme.css" theme(reference);
 </style>
-
-

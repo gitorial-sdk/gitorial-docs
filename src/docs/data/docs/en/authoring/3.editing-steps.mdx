@@ -8,8 +8,6 @@ sidebar:
 pagefind: true
 ---
 
-import Steps from "@/docs/components/mdx-components/Steps.astro";
-
 ## Editing steps
 
 You can edit any step in isolation while keeping the overall narrative intact. Edits are performed in the Folded view; when ready, generate the Unfolded PR structure from the current Folded timeline.
@@ -23,11 +21,11 @@ You can edit any step in isolation while keeping the overall narrative intact. E
     You can pick a step from the timeline by double clicking it. If there are any changes the menu will display them similar to the _'source control'_ panel.
 
 2.  **Edit steps**<br/>
-    Authors make changes directly in the Folded view - for example, selecting and editing the files for step _N_. 
-    Each edit modifies the underlying commit sequence that defines the tutorial timeline. Update the commit message via the UI.
+    A user is able to select and edit the files for step _N_.
+    Each edit modifies the underlying commit sequence that defines the tutorial timeline. Furthermore the user can update the commit message via the UI.
 
 3.  **Resolve conflicts (if any)**<br/>
-    If downstream steps depend on content that changed in an earlier step, the authoring interface will guide the user through resolving those conflicts one by one.
+    If downstream steps depend on content that changed in an earlier step, the authoring interface will guide the user through resolving potential conflicts one by one.
     See ordering rules like [Template must be followed by Solution](/docs/authoring/7validation#rule-TemplateMustBeFollowedBySolution) and [Solution must follow Template or Action](/docs/authoring/validation#rule-SolutionMustFollowTemplateOrAction).
 
 4.  **Validate the story**<br/>
