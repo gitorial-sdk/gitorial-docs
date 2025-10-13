@@ -1,0 +1,85 @@
+---
+title: "Gitorial Authoring - Change Tracking"
+description: "How step change tracking works and how to diff precisely"
+tab: "main"
+sidebar:
+  label: "Change Tracking"
+  order: 7
+pagefind: true
+---
+
+import Aside from "@/docs/components/mdx-components/Aside.astro"
+
+## Change Tracking
+
+In Gitorial, each tutorial step corresponds to a git commit. When you edit a step in the middle of the history, git rewrites that commit and all subsequent commits, producing new hashes. This forces us to to find a solution on how to identify steps and their coresponding remote tracking commits for step-to-step comparisons.
+
+![Remote & Local](./assets/change-tracking-branch.svg)
+
+We can express this formally:
+
+```math
+\forall\, N \ge 1:\; h'(X+N) \ne h(X+N)
+```
+
+```math
+\Delta(X+N) := \operatorname{diff}\big(h_{\mathrm{remote}}(X+N),\, h_{\mathrm{local}}(X+N)\big)
+```
+
+Concretely, for a given step ID's, compare:
+
+`git diff h_remote(s) h_local(s)`
+
+### Solution: Embedded
+
+One solution is to build into the `Step-Model` a field like: `remoteTrackingCommitHash` which will point to a commit hash the step originally belongs to.
+Newly included steps will have this field initialized with `null | undefined`
+
+### Solution: The Step Registry
+
+Another solution is, to keep comparisons stable, we build a Step Registry during authoring initialization. It maps each step to its original remote commit, even if local commits get rewritten.
+
+| Step ID (immutable) | Local Commit Hash (mutable) | Remote Tracking Hash |
+| ------------------- | --------------------------- | -------------------- |
+| `id1...`            | `abc123...`                 | `abc123...`          |
+| `id2...`            | `def456...`                 | `def456...`          |
+| `id3...`            | `ghi789...`                 | `ghi789...`          |
+
+Notes:
+
+- **Step ID**: Permanent, never changes; any stable unique identifier.
+- **Local Commit Hash**: Current local hash; changes when a step is edited.
+- **Remote Tracking Hash**: Original remote hash; constant reference point.
+
+
+<Aside variant="info">
+    We still need to decide if to implement the Embedded solution or the Step Registry solution.
+</Aside>
+
+### After An Edit
+
+![Mutated tracking branch](./assets/change-tracking-branch-mutated.svg)
+
+Editing step `id2` rewrites its local commit (and usually following ones) but keeps the Step ID and Remote Tracking Hash untouched:
+
+| Step ID (immutable) | Local Commit Hash (mutable) | Remote Tracking Hash |
+| ------------------- | --------------------------- | -------------------- |
+| `id1...`            | `abc123...`                 | `abc123...`          |
+| `id2...`            | `xyz999...`                 | `def456...`          |
+| `id3...`            | `jkl888...`                 | `ghi789...`          |
+
+To see precisely what changed in the edited step:
+
+`git diff <remote-tracking-hash> <local-commit-hash>`
+
+Example: `git diff def456... xyz999...`
+
+### New Steps
+
+New steps are not present in the registry yet (no hit ⇒ new). Like new files in git, there is no remote to compare against until the step is pushed and a new authoring session started.
+
+## Mutated History Visualization
+
+![Mutated Local Branch](./assets/change-tracking-branch-mutated.svg)
+
+That’s it: immutable Step IDs give us stable anchors; Remote Tracking Hashes provide the reference; Local Commit Hashes capture the current state. This trio makes step-aware diffs reliable, even through rewritten histories.

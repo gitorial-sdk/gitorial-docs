@@ -81,7 +81,10 @@ const svgUrl = typeof src === "string" ? src : src.src;
   document.addEventListener("astro:page-load", initExcalidrawSVG);
 </script>
 
-<style>
+<style is:global>
+  @import "tailwindcss/theme" theme(reference);
+  @import "@/styles/tailwind-theme.css" theme(reference);
+
   .excalidraw-figure {
     @apply my-8 w-full max-w-full overflow-hidden;
   }
@@ -107,6 +110,6 @@ const svgUrl = typeof src === "string" ? src : src.src;
     @apply opacity-80;
   }
   figcaption {
-    @apply text-skin-base mt-4 text-center text-sm italic;
+    @apply mt-4 text-center text-sm italic;
   }
 </style>

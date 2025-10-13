@@ -1,12 +1,14 @@
 ---
-title: "Gitorial - Authoring"
-description: "How to author Gitorials effectively: edit steps confidently and open great PRs."
+title: "Authoring"
+description: "Overview of Authoring: explains its goals, outlines the workflow, and introduces the main high-level structures involved."
 tab: "main"
 sidebar:
   label: "Overview"
   order: 1
 pagefind: true
 ---
+
+import Steps from '@/docs/components/mdx-components/Steps.astro'
 
 Gitorial is an interactive coding tutorial format that uses Git commits as the "steps" of a narrative. Authoring is everything you do to create and refine those steps so learners experience a smooth, incremental journey.
 
@@ -20,19 +22,27 @@ To make this work, we rely on two complementary representations of your tutorial
 - **Folded:** the “final” story - a linear chain of commits, one per step. This is where you edit.
 - **Unfolded:** a file-system view - one folder per step, each containing the full repo for that point in time. This is a shadow used to structure PRs.
 
-![Split view — left: Folded commit diff; right: corresponding Unfolded `step-03` folder](./assets/folded-unfolded-split-view.svg)
-
 You won't actively switch between these two views during authoring. Unfolded behaves like a shadow state - hidden but necessary for proper alignment with Git and for producing step-structured PRs. See ["Unfolded vs Folded"](./folded-unfolded) for details on how they map to each other.
 
 ## End-to-End Authoring Flow
 
 The following sequence describes how an author creates, edits, and publishes a Gitorial tutorial.
 
+```mermaid
+flowchart LR
+  A["Start<br/>Session"] --> B["Edit<br/>in Folded"]
+  B --> C["Validate<br/>Tutorial"]
+  C --> D["Generate<br/>Unfolded"]
+  D --> E["Open<br/>Pull Request"]
+```
+
+<Steps>
+
 1. **Start an authoring session**<br/>
-   The extension prepares the authoring environment by utilizing git worktrees. Initially only a worktree for the **Folded** state gets created.
+   The extension prepares the authoring environment by utilizing git worktrees. Initially only a worktree for the Folded state gets created.
 
 2. **Edit steps**<br/>
-   Authors make changes directly in the **Folded view** — for example, checking out and editing the commit for step _N_.
+   Authors make changes directly in the Folded view — for example, checking out and editing the commit for step _N_.
    Each edit modifies the underlying commit sequence that defines the tutorial timeline.
 
 3. **Resolve conflicts (if any)**<br/>
@@ -43,17 +53,11 @@ The following sequence describes how an author creates, edits, and publishes a G
    Validation may include running tests, executing build checks, or ensuring that each step logically follows from the previous one.
 
 5. **Create PR-ready structure**<br/>
-   When the Gitorial is in a valid state, the author explicitly triggers a **"Create PR-ready structure"** action.
-   This process expands the **Folded** state into an **Unfolded** representation, where each step is written to a corresponding `step-N/` folder.
+   When the Gitorial is in a valid state, the author explicitly triggers a "Create PR-ready structure" action.
+   This process expands the Folded state into an Unfolded representation, where each step is written to a corresponding `steps/N/` folder. <br/>
    The generated structure lives locally and can be inspected before publication.
 
 6. **Open a pull request**<br/>
-   Once satisfied, the author opens a **PR** for the unfolded state.
+   Once satisfied, the author opens a PR for the unfolded state.
 
-```mermaid
-flowchart LR
-  A["Start<br/>Session"] --> B["Edit<br/>in Folded"]
-  B --> C["Validate<br/>Tutorial"]
-  C --> D["Generate<br/>Unfolded"]
-  D --> E["Open<br/>Pull Request"]
-```
+</Steps>
