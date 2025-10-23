@@ -12,7 +12,7 @@ import { getLocalizedRoute } from "@/docs/js/translationUtils";
 interface Props {
   title: string; // larger title
   description: string; // paragraph text
-  buttonText: string; // button text
+  buttonText?: string; // button text
   href: string; // link to learn more
   image: ImageMetadata; // an imported image
   imageSide: "left" | "right";
@@ -40,11 +40,15 @@ const currLocale = getLocaleFromUrl(Astro.url);
           {description}
         </p>
       </div>
-      <div class="z-20 mt-8 flex">
-        <Button variant="outline" href={href}>
-          {buttonText}
-        </Button>
-      </div>
+      {
+        buttonText && (
+          <div class="z-20 mt-8 flex">
+            <Button variant="outline" href={href}>
+              {buttonText}
+            </Button>
+          </div>
+        )
+      }
     </div>
   </div>
 
@@ -53,6 +57,6 @@ const currLocale = getLocaleFromUrl(Astro.url);
     class="mb-auto h-auto w-full overflow-hidden rounded-xl border md:rounded-2xl"
     data-mos="fade-in"
   >
-    <Image class="h-full w-full object-cover" src={image} alt={title} height={700} />
+    <Image class="h-full w-full object-cover" src={image} alt={title} height={700} /> :
   </div>
 </div>

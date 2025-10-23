@@ -18,11 +18,6 @@ const navConfig: navItem[] = [
     text: "Development",
     link: "/docs/development/",
   },
-  {
-    text: "GitHub",
-    link: "https://github.com/gitorial-sdk/gitorial-vscode.git",
-    newTab: true,
-  },
 ];
 
 export default navConfig;

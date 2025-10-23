@@ -19,24 +19,6 @@ const siteData = getTranslatedData("siteData", currLocale);
     <Sponsors />
     <Features />
 
-    {/* Mermaid Test Diagram */}
-    <section class="py-16">
-      <div class="container mx-auto px-4">
-        <h2 class="mb-8 text-center text-3xl font-bold">Mermaid Diagram Test</h2>
-        <div class="mx-auto max-w-2xl">
-          <MermaidRenderer
-            client:visible
-            code={`flowchart LR
-            A[Start Session] --> B[Edit in Folded]
-            B --> C[Validate Tutorial]
-            C --> D[Generate Unfolded]
-            D --> E[Open Pull Request]`}
-            id="authoring-flow"
-          />
-        </div>
-      </div>
-    </section>
-
     <Testimonials />
     <CtaGlow />
   </main>

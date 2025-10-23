@@ -3,43 +3,44 @@
  * * These are alternating side cards with titles, text, and images
  * Recommend using 2 or 3 cards in a row
  */
-import image1 from "@images/feature/custom-components.jpg";
-import image2 from "@images/feature/frontmatter.jpg";
-import image3 from "@images/feature/sidebar.jpg";
+import placeholderImg from "@images/placeholder.webp";
 
 import FeatureCard from "./FeatureCardSideImage.astro";
 
-interface FeatureItem {
-  image: ImageMetadata; // an imported image
-  title: string;
-  description: string;
-  href: string; // link to learn more
-  buttonText: string; // button text
-}
+type FeatureItem =
+  | {
+      image: ImageMetadata;
+      title: string;
+      description: string;
+      buttonText?: undefined;
+      href?: undefined;
+    }
+  | {
+      image: ImageMetadata;
+      title: string;
+      description: string;
+      buttonText: string;
+      href: string;
+    };
 
 const featureData: FeatureItem[] = [
   {
-    image: image1,
-    title: "Integrated Components",
+    image: placeholderImg,
+    title: "Git-native & Collaborative",
     description:
-      "In addition to steps, tabs, asides, and more, Gitorial also supports custom components for you to use in your documentation.",
-    href: "/docs/components/",
-    buttonText: "Custom Components",
+      "Each step is a commit: reproducible, traceable, and reviewable. Your tutorials evolve with your repo, and improvements flow in via pull requests.",
   },
   {
-    image: image3,
-    title: "Sidebar Customization",
-    description: "Easily configure the sidebar menu to match your desired docs structure.",
-    href: "/docs/reference/sidebar-navigation/",
-    buttonText: "Sidebar Config",
+    image: placeholderImg,
+    title: "Author Inside Your IDE",
+    description:
+      "Write and run tutorial code where you already work. No context switching—author, preview, and validate directly in VS Code.",
   },
   {
-    image: image2,
-    title: "Frontmatter Configuration",
+    image: placeholderImg,
+    title: "Maintainable Over Time",
     description:
-      "Each docs entry in Gitorial supports tons of frontmatter options for easy configuration of your documentation.",
-    href: "/docs/reference/frontmatter-reference/",
-    buttonText: "Frontmatter Reference",
+      "When code or APIs change, update steps with minimal friction. Guided conflict resolution keeps tutorials accurate without rewrites.",
   },
 ];
 ---
