@@ -1,0 +1,31 @@
+# Development Dockerfile for hot reloading
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install system dependencies needed for Sharp and other native modules
+RUN apk add --no-cache \
+    libc6-compat \
+    vips-dev \
+    build-base \
+    python3 \
+    make \
+    g++
+
+# Install pnpm
+RUN npm install -g pnpm@latest
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install
+
+# Copy source code
+COPY . .
+
+# Expose port
+EXPOSE 4321
+
+# Start development server
+CMD ["pnpm", "run", "dev", "--host", "0.0.0.0"]

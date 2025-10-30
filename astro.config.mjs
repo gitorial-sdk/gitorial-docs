@@ -22,6 +22,8 @@ const copySvg = createInlineSvgUrl(
 export default defineConfig({
   site: "https://gitorial-sdk.com",
   // i18n configuration must match src/docs/config/translationData.json.ts
+  base: "/",
+  output: "static",
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [[rehypeKatex, {}], rehypeMermaidPlugin],
